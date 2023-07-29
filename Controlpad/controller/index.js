@@ -75,14 +75,14 @@ ws.onclose = (event) => {
 // wait for websocket to connect
 ws.onopen = (event) => {
     console.log("openned websocket")
+    
+    drawController(canvas, ctx);
 
     byte_array = new Uint8Array(1);
     byte_array[0] = subid;
     ws.send(byte_array.buffer);
 
     ws.addEventListener('message', (event) => {
-	msg = event.data;
-        handleMessage(msg);
     });
 
 
@@ -191,6 +191,7 @@ ws.onopen = (event) => {
             console.log("sending <" + msg + ">");
             ws.send(msg);
         }
+        /*
         let drbls = getDrawables();
         if (drbls.length > 0) {
             ctx.fillStyle = "#808080";
@@ -199,6 +200,7 @@ ws.onopen = (event) => {
                 draw_drawable(drbl);
             }
         }
+        */
     }
 
     controlpadStart();
