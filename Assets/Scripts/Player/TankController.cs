@@ -14,20 +14,18 @@ namespace FirstGameNiteJam
 
         private void FixedUpdate()
         {
-            Vector2Int dir = new();
-            if (Up) dir.y += 1;
-            if (Down) dir.y -= 1;
-            if (Left) dir.x += 1;
-            if (Right) dir.x -= 1;
+            Vector2Int v = new();
+            if (Up) v.y = 1;
+            if (Down) v.y = -1;
+            if (Right) v.x += 1;
+            if (Left) v.x -= 1;
 
-            Debug.Log(dir);
-
-            _rb.velocity = (Vector2)dir * Time.fixedDeltaTime * 100f;
+            _rb.velocity = new(0f, 0f, v.y * Time.fixedDeltaTime * 100f);
+            _rb.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * 100f, 0f);
         }
 
         public void GoForward(bool isPressed)
         {
-            Debug.Log(isPressed);
             Up = isPressed;
         }
 
