@@ -9,8 +9,8 @@
     "programming": "Programmation :",
 
     "rules": "Règles :",
-    "rulesEx0": "Le premier joueur connecté doit chasser les autres",
-    "rulesEx1": "Si le timer atteint 0, il a perdu",
+    "rulesEx0": "Vous serez assigné un rôle entre chasseur et fuilleur",
+    "rulesEx1": "Les fuilleurs doivent rester en vie pendant toute la partie et le chasseur doit les détruirent",
     "rulesEx2": "Déplacez vous avec la croix directionnelle",
     "rulesEx3": "Le chasseur peut tirer avec le bouton d'action",
     "rulesEx4": "Les fuilleurs peuvent lancer un leur avec",

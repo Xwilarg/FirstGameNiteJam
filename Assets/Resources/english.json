@@ -9,8 +9,8 @@
     "programming": "Programming:",
 
     "rules": "Rules:",
-    "rulesEx0": "First player connected need to chase the others",
-    "rulesEx1": "If timer reach 0, he loose",
+    "rulesEx0": "You'll be assigned a random role between chaser and runner",
+    "rulesEx1": "Runner have to stay alive the whole time of the game and chaser have to kill them",
     "rulesEx2": "Move with D-Pad",
     "rulesEx3": "Chaser can shoot with action button",
     "rulesEx4": "Runners can launch a decoy with it",
