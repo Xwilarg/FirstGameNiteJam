@@ -1,3 +1,5 @@
+using System.Collections;
+using TouhouPrideGameJam5.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +7,12 @@ namespace FirstGameNiteJam
 {
     public class TankController : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _bulletPrefab;
+
+        [SerializeField]
+        private PlayerInfo _info;
+
         private Rigidbody _rb;
         private bool Down, Up, Right, Left;
 
@@ -27,8 +35,8 @@ namespace FirstGameNiteJam
             if (Right) v.x += 1;
             if (Left) v.x -= 1;
 
-            _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * 100f;
-            _rb.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * 100f, 0f);
+            _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
+            _rb.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
         }
 
         public void GoForward(bool isPressed)
@@ -55,12 +63,22 @@ namespace FirstGameNiteJam
         {
             if (_isAttacker)
             {
-                // TODO: Shoot
+                if (_canShoot)
+                {
+                    StartCoroutine(Reload());
+                }
             }
             else
             {
                 // TODO: Decoy
             }
+        }
+
+        private IEnumerator Reload()
+        {
+            _canShoot = false;
+            yield return new WaitForSeconds(_reloadTime);
+            _canShoot = true;
         }
 
         public void OnMove(InputAction.CallbackContext value)

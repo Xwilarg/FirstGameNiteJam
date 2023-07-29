@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2000490849070120143}
   - component: {fileID: 2000490849070120142}
   - component: {fileID: 2374787183358739844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a0130e4c29b504881f38623a3ad669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 3521230163132224798, guid: eb0c1038b2f20194c9369bb35f138e07, type: 3}
+  _info: {fileID: 11400000, guid: d9d8b07c766e9424eaf02028518c5c07, type: 2}
 --- !u!114 &2374787183358739844
 MonoBehaviour:
   m_ObjectHideFlags: 0

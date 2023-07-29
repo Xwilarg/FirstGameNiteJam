@@ -52,6 +52,7 @@ namespace FirstGameNiteJam
                     case "{down}": target.GoBackward(isPressed); break;
                     case "{left}": target.GoLeft(isPressed); break;
                     case "{right}": target.GoRight(isPressed); break;
+                    case "{action}": if (isPressed) target.DoAction(); break;
                     default: Debug.LogError($"Unknown message {id}"); break;
                 }
             }
