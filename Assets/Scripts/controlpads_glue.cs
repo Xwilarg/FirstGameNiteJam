@@ -52,7 +52,7 @@ public class controlpads_glue : MonoBehaviour
     [SerializeField]
     private UnityEvent<string, string> _onMessage;
 
-    List<string> clientHandles = new List<string>();
+    static List<string> clientHandles = new List<string>();
 
     // Update is called once per frame
     void Update()
