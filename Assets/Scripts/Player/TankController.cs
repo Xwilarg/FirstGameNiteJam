@@ -22,7 +22,7 @@ namespace FirstGameNiteJam
         private Transform currentDecoy;
         private Rigidbody rbDecoy;
 
-        private bool _isAttacker;
+        private bool? _isAttacker = null;
         private int _health;
 
         private void Awake()
@@ -86,9 +86,9 @@ namespace FirstGameNiteJam
 
         public void DoAction()
         {
-            if (_canDoAction)
+            if (_canDoAction && _isAttacker.HasValue)
             {
-                if (_isAttacker)
+                if (_isAttacker.Value)
                 {
                     var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
                     bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
