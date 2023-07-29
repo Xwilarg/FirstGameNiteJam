@@ -11,9 +11,12 @@ namespace FirstGameNiteJam
         private bool _canShoot;
         private const float _reloadTime = 1f;
 
+        private bool _isAttacker;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            _isAttacker = GameManager.Instance.IsAttacker;
         }
 
         private void FixedUpdate()
@@ -48,6 +51,18 @@ namespace FirstGameNiteJam
             Right = isPressed;
         }
 
+        public void DoAction()
+        {
+            if (_isAttacker)
+            {
+                // TODO: Shoot
+            }
+            else
+            {
+                // TODO: Decoy
+            }
+        }
+
         public void OnMove(InputAction.CallbackContext value)
         {
             if (value.performed)
@@ -64,6 +79,14 @@ namespace FirstGameNiteJam
                 GoBackward(false);
                 GoLeft(false);
                 GoRight(false);
+            }
+        }
+
+        public void OnAction(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+                DoAction();
             }
         }
     }

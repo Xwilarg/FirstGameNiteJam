@@ -170,11 +170,19 @@ MonoBehaviour:
     m_ActionId: af3c727c-f95a-4022-b822-b56755b9c54a
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9b57af14-3080-4b44-a01b-0088678cea99
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2000490849070120142}
+        m_TargetAssemblyTypeName: FirstGameNiteJam.TankController, Assembly-CSharp
+        m_MethodName: OnAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 81f116d7-8a96-4848-b350-eda0e61b2f73
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
