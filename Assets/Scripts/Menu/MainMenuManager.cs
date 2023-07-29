@@ -9,8 +9,13 @@ namespace FirstGameNiteJam.Menu
         [SerializeField]
         private Button[] _buttons;
 
+        [SerializeField]
+        private GameObject _helpWindow, _creditsWindow;
+
         private Color _baseColor;
         private int _index;
+
+        private bool _isSubWindowOn;
 
         private void Awake()
         {
@@ -21,6 +26,11 @@ namespace FirstGameNiteJam.Menu
         public void StartGame()
         {
             SceneManager.LoadScene("Main");
+        }
+
+        public void RegisterSubWindow()
+        {
+            _isSubWindowOn = true;
         }
 
         public void Quit()
@@ -64,7 +74,16 @@ namespace FirstGameNiteJam.Menu
                         break;
 
                     case "{action}":
-                        _buttons[_index].onClick.Invoke();
+                        if (_isSubWindowOn)
+                        {
+                            _isSubWindowOn = false;
+                            _creditsWindow.SetActive(false);
+                            _helpWindow.SetActive(false);
+                        }
+                        else
+                        {
+                            _buttons[_index].onClick.Invoke();
+                        }
                         break;
                 }
             }
