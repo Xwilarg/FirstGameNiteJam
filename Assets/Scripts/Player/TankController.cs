@@ -27,7 +27,19 @@ namespace FirstGameNiteJam
 
         private readonly List<GameObject> _decoys = new();
 
-        public bool? IsAttacker { set; private get; } = null;
+        private bool? _isAttacker;
+        public bool? IsAttacker
+        {
+            set
+            {
+                _isAttacker = value;
+                if (ClientId != null)
+                {
+                    GameManager.Instance.SendMessageToClient(ClientId, IsAttacker.Value ? "ATT1" : "ATT0");
+                }
+            }
+            get => _isAttacker;
+        }
         private int _health;
 
         private void Awake()
@@ -53,7 +65,6 @@ namespace FirstGameNiteJam
         {
             GameManager.Instance.Register(this);
             IsAttacker = GameManager.Instance.IsAttacker;
-            //GameManager.Instance.SendMessageToClient(ClientId, _isAttacker.Value ? "ATT1" : "ATT0");
         }
 
         private void FixedUpdate()
