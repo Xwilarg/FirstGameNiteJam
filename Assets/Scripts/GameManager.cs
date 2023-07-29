@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -67,11 +68,12 @@ namespace FirstGameNiteJam
             if (_timerVal != null)
             {
                 _timerVal -= Time.deltaTime;
-                _timer.text = $"{(int)_timerVal.Value}";
                 if (_timerVal <= 0)
                 {
+                    _timerVal = 0;
                     EndGame(false);
                 }
+                _timer.text = $"{(int)_timerVal.Value}";
             }
         }
 
@@ -79,22 +81,36 @@ namespace FirstGameNiteJam
         {
             tc.GetComponent<MeshRenderer>().enabled = false;
             tc.enabled = false;
+            if (_registeredTanks.Count(x => x.enabled) == 1)
+            {
+                EndGame(true);
+            }
         }
 
         public void EndGame(bool didAttackerWin)
         {
             if (!_didWin)
             {
-                _didWin = true;
-                foreach (var tc in _registeredTanks)
-                {
-                    tc.GetComponent<MeshRenderer>().enabled = false;
-                    tc.enabled = false;
-                    SetPosition(tc);
-                    tc.ResetTank();
-                }
-                _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
+                StartCoroutine(ResetGame());
             }
+        }
+
+        private IEnumerator ResetGame()
+        {
+            _didWin = true;
+            yield return new WaitForSeconds(2f);
+
+            foreach (var tc in _registeredTanks)
+            {
+                tc.GetComponent<MeshRenderer>().enabled = false;
+                tc.enabled = false;
+                SetPosition(tc);
+                tc.ResetTank();
+            }
+            _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
+            _timerVal = _info.RoundDuration;
+
+            _didWin = false;
         }
 
         public void SendMessageToClient(string client, string msg)
