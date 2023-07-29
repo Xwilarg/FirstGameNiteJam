@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using FirstGameNiteJam.Translation;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,8 +14,13 @@ namespace FirstGameNiteJam.Menu
         [SerializeField]
         private GameObject _helpWindow, _creditsWindow;
 
+        [SerializeField]
+        private TMP_Text _langButton;
+
         private Color _baseColor;
         private int _index;
+
+        private int _indexLang;
 
         private bool _isSubWindowOn;
 
@@ -26,6 +33,17 @@ namespace FirstGameNiteJam.Menu
         public void StartGame()
         {
             SceneManager.LoadScene("Main");
+        }
+
+        public void ChangeLanguage()
+        {
+            _indexLang++;
+            if (_indexLang == Translate.Languages.Length)
+            {
+                _indexLang = 0;
+            }
+
+            Translate.Instance.CurrentLanguage = Translate.Languages[_indexLang];
         }
 
         public void RegisterSubWindow()
