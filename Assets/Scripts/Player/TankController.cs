@@ -119,6 +119,7 @@ namespace FirstGameNiteJam
                 {
                     currentDecoy = Instantiate(decoy, transform.position, transform.rotation, null).transform;
                     Destroy(currentDecoy.gameObject, _info.DecoyLifetime);
+                    _decoys.Add(currentDecoy.gameObject);
                     rbDecoy = currentDecoy.GetComponent<Rigidbody>();
                     StartCoroutine(Reload(_info.SkillReloadTime));
                 }

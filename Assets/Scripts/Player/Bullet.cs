@@ -10,6 +10,10 @@ namespace FirstGameNiteJam.Player
             {
                 collision.collider.GetComponent<TankController>().TakeDamage();
             }
+            else if (collision.collider.CompareTag("Decoy"))
+            {
+                Destroy(collision.collider.gameObject);
+            }
             Destroy(gameObject);
         }
 
