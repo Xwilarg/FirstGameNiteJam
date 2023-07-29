@@ -20,11 +20,13 @@ namespace FirstGameNiteJam
         private const float _reloadTime = 1f;
 
         private bool _isAttacker;
+        private int _health;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _isAttacker = GameManager.Instance.IsAttacker;
+            _health = _info.BaseHealth;
         }
 
         private void FixedUpdate()
@@ -36,7 +38,17 @@ namespace FirstGameNiteJam
             if (Left) v.x -= 1;
 
             _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
-            _rb.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+            transform.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+        }
+
+        public void TakeDamage()
+        {
+            _health--;
+            if (_health == 0)
+            {
+                Debug.Log("Dead");
+                // TODO: Dead
+            }
         }
 
         public void GoForward(bool isPressed)
@@ -66,7 +78,7 @@ namespace FirstGameNiteJam
                 if (_canShoot)
                 {
                     var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
-                    bullet.GetComponent<Rigidbody>().AddForce((transform.forward + Vector3.up).normalized * _info.BulletForce, ForceMode.Impulse);
+                    bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
                     Destroy(bullet, 5f);
                     StartCoroutine(Reload());
                 }

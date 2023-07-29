@@ -7,5 +7,6 @@ namespace TouhouPrideGameJam5.SO
     {
         public float LinearSpeed, AngularSpeed;
         public float BulletForce;
+        public int BaseHealth;
     }
 }

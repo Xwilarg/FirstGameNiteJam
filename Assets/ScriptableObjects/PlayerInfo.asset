@@ -15,3 +15,4 @@ MonoBehaviour:
   LinearSpeed: 100
   AngularSpeed: 100
   BulletForce: 10
+  BaseHealth: 3
