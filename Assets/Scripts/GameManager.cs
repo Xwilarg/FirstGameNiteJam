@@ -1,3 +1,4 @@
+using FirstGameNiteJam.Translation;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace FirstGameNiteJam
         private GameObject _preparationUI;
 
         [SerializeField]
+        private TMP_Text _startingText;
+
+        [SerializeField]
         private Transform[] _spawnPoints;
 
         [SerializeField]
@@ -34,7 +38,7 @@ namespace FirstGameNiteJam
         private readonly Dictionary<string, TankController> _controllers = new();
         private List<TankController> _registeredTanks = new();
 
-        private bool _didWin;
+        public bool DidWin { private set; get; } = true;
 
         private int _playerJoined;
         private bool _isAttacker = true;
@@ -51,10 +55,31 @@ namespace FirstGameNiteJam
                 if (_playerJoined == 2)
                 {
                     _preparationUI.SetActive(false);
-                    _timerVal = _info.RoundDuration;
+                    _startingText.gameObject.SetActive(true);
+                    StartCoroutine(WaitAndStartRound());
                 }
                 return false;
             }
+        }
+
+        private IEnumerator WaitAndStartRound()
+        {
+            for (int i = 0; i < _info.TimeBeforeRound; i++)
+            {
+                _startingText.text = $"{Translate.Instance.Tr("starting")} {_info.TimeBeforeRound - i}...";
+                yield return new WaitForSeconds(1f);
+            }
+            _startingText.gameObject.SetActive(false);
+            _timerVal = _info.RoundDuration;
+            DidWin = false;
+
+            // Randomize tank position and role
+            foreach (var tc in _registeredTanks)
+            {
+                SetPosition(tc);
+                tc.ResetTank();
+            }
+            _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
         }
 
         private void Awake()
@@ -65,7 +90,7 @@ namespace FirstGameNiteJam
 
         private void Update()
         {
-            if (_timerVal != null && !_didWin)
+            if (_timerVal != null && !DidWin)
             {
                 _timerVal -= Time.deltaTime;
                 if (_timerVal <= 0)
@@ -89,7 +114,7 @@ namespace FirstGameNiteJam
 
         public void EndGame(bool didAttackerWin)
         {
-            if (!_didWin)
+            if (!DidWin)
             {
                 StartCoroutine(ResetGame());
             }
@@ -97,20 +122,17 @@ namespace FirstGameNiteJam
 
         private IEnumerator ResetGame()
         {
-            _didWin = true;
-            yield return new WaitForSeconds(2f);
+            DidWin = true;
+            _startingText.gameObject.SetActive(true);
+            yield return WaitAndStartRound();
 
+            // Put all tanks back to the game
             foreach (var tc in _registeredTanks)
             {
                 tc.GetComponent<MeshRenderer>().enabled = true;
                 tc.enabled = true;
-                SetPosition(tc);
-                tc.ResetTank();
             }
-            _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
-            _timerVal = _info.RoundDuration;
 
-            _didWin = false;
         }
 
         public void SendMessageToClient(string client, string msg)

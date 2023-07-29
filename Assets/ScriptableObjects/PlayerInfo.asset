@@ -18,3 +18,4 @@ MonoBehaviour:
   BaseHealth: 3
   ShootReloadTime: 1
   SkillReloadTime: 3
+  DecoyLifetime: 10

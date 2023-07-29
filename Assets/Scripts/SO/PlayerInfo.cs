@@ -10,5 +10,6 @@ namespace TouhouPrideGameJam5.SO
         public int BaseHealth;
         public float ShootReloadTime;
         public float SkillReloadTime;
+        public float DecoyLifetime;
     }
 }

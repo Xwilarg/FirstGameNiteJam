@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TouhouPrideGameJam5.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,6 +25,8 @@ namespace FirstGameNiteJam
         private Transform currentDecoy;
         private Rigidbody rbDecoy;
 
+        private readonly List<GameObject> _decoys = new();
+
         public bool? IsAttacker { set; private get; } = null;
         private int _health;
 
@@ -37,6 +40,13 @@ namespace FirstGameNiteJam
         {
             _health = _info.BaseHealth;
             IsAttacker = false;
+
+            // Remove all decoys
+            foreach (var d in _decoys)
+            {
+                Destroy(d);
+            }
+            _decoys.Clear();
         }
 
         private void Start()
@@ -66,6 +76,7 @@ namespace FirstGameNiteJam
 
         public void TakeDamage()
         {
+            if (GameManager.Instance.DidWin) return;
             _health--;
             if (_health == 0)
             {
@@ -107,6 +118,7 @@ namespace FirstGameNiteJam
                 else
                 {
                     currentDecoy = Instantiate(decoy, transform.position, transform.rotation, null).transform;
+                    Destroy(currentDecoy.gameObject, _info.DecoyLifetime);
                     rbDecoy = currentDecoy.GetComponent<Rigidbody>();
                     StartCoroutine(Reload(_info.SkillReloadTime));
                 }

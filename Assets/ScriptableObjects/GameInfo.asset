@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameInfo
   m_EditorClassIdentifier: 
   RoundDuration: 120
+  TimeBeforeRound: 10

@@ -21,5 +21,6 @@
     "quit": "Quitter",
 
     "pressAnyKey": "Appuyez sur une touche pour rejoindre",
-    "waitingPlayers": "En attente d'au moins 2 joueurs..."
+    "waitingPlayers": "En attente d'au moins 2 joueurs...",
+    "starting": "La partie démarre dans"
 }

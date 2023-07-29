@@ -21,5 +21,6 @@
     "quit": "Quit",
 
     "pressAnyKey": "Press any key to join",
-    "waitingPlayers": "Waiting for at least 2 players..."
+    "waitingPlayers": "Waiting for at least 2 players...",
+    "starting": "Game starting in"
 }

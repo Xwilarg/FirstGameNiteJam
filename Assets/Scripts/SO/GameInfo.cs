@@ -6,5 +6,6 @@ namespace TouhouPrideGameJam5.SO
     public class GameInfo : ScriptableObject
     {
         public float RoundDuration;
+        public float TimeBeforeRound;
     }
 }
