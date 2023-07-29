@@ -24,7 +24,7 @@ namespace FirstGameNiteJam
         private Transform currentDecoy;
         private Rigidbody rbDecoy;
 
-        private bool? _isAttacker = null;
+        public bool? IsAttacker { set; private get; } = null;
         private int _health;
 
         private void Awake()
@@ -33,10 +33,16 @@ namespace FirstGameNiteJam
             _health = _info.BaseHealth;
         }
 
+        public void ResetTank()
+        {
+            _health = _info.BaseHealth;
+            IsAttacker = false;
+        }
+
         private void Start()
         {
             GameManager.Instance.Register(this);
-            _isAttacker = GameManager.Instance.IsAttacker;
+            IsAttacker = GameManager.Instance.IsAttacker;
             //GameManager.Instance.SendMessageToClient(ClientId, _isAttacker.Value ? "ATT1" : "ATT0");
         }
 
@@ -63,8 +69,7 @@ namespace FirstGameNiteJam
             _health--;
             if (_health == 0)
             {
-                Debug.Log("Dead");
-                // TODO: Dead
+                GameManager.Instance.RemoveTank(this);
             }
         }
 
@@ -90,9 +95,9 @@ namespace FirstGameNiteJam
 
         public void DoAction()
         {
-            if (_canDoAction && _isAttacker.HasValue)
+            if (_canDoAction && IsAttacker.HasValue)
             {
-                if (_isAttacker.Value)
+                if (IsAttacker.Value)
                 {
                     var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
                     bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);

@@ -33,6 +33,8 @@ namespace FirstGameNiteJam
         private readonly Dictionary<string, TankController> _controllers = new();
         private List<TankController> _registeredTanks = new();
 
+        private bool _didWin;
+
         private int _playerJoined;
         private bool _isAttacker = true;
         public bool IsAttacker
@@ -68,8 +70,30 @@ namespace FirstGameNiteJam
                 _timer.text = $"{(int)_timerVal.Value}";
                 if (_timerVal <= 0)
                 {
-                    // TODO: GameOver
+                    EndGame(false);
                 }
+            }
+        }
+
+        public void RemoveTank(TankController tc)
+        {
+            tc.GetComponent<MeshRenderer>().enabled = false;
+            tc.enabled = false;
+        }
+
+        public void EndGame(bool didAttackerWin)
+        {
+            if (!_didWin)
+            {
+                _didWin = true;
+                foreach (var tc in _registeredTanks)
+                {
+                    tc.GetComponent<MeshRenderer>().enabled = false;
+                    tc.enabled = false;
+                    SetPosition(tc);
+                    tc.ResetTank();
+                }
+                _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
             }
         }
 
@@ -78,12 +102,17 @@ namespace FirstGameNiteJam
             _net.SendMessageToClient(client, msg);
         }
 
-        public void Register(TankController tc)
+        private void SetPosition(TankController tc)
         {
             var furthestPos = _registeredTanks.Any()
                 ? _spawnPoints.OrderByDescending(x => _registeredTanks.Min(t => Vector3.Distance(x.position, t.transform.position))).ElementAt(0)
                 : _spawnPoints[Random.Range(0, _spawnPoints.Length)];
             tc.transform.position = furthestPos.position;
+        }
+
+        public void Register(TankController tc)
+        {
+            SetPosition(tc);
             _registeredTanks.Add(tc);
         }
 
