@@ -65,7 +65,7 @@ namespace FirstGameNiteJam
 
         private void Update()
         {
-            if (_timerVal != null)
+            if (_timerVal != null && !_didWin)
             {
                 _timerVal -= Time.deltaTime;
                 if (_timerVal <= 0)
@@ -102,8 +102,8 @@ namespace FirstGameNiteJam
 
             foreach (var tc in _registeredTanks)
             {
-                tc.GetComponent<MeshRenderer>().enabled = false;
-                tc.enabled = false;
+                tc.GetComponent<MeshRenderer>().enabled = true;
+                tc.enabled = true;
                 SetPosition(tc);
                 tc.ResetTank();
             }
