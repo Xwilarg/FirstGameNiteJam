@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FirstGameNiteJam
 {
@@ -22,6 +23,7 @@ namespace FirstGameNiteJam
             if (!_controllers.ContainsKey(id))
             {
                 var go = Instantiate(_tank, Vector3.zero, Quaternion.identity);
+                go.GetComponent<PlayerInput>().enabled = false;
                 _controllers.Add(id, go.GetComponent<TankController>());
             }
 

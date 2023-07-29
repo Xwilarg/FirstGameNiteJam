@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FirstGameNiteJam
 {
@@ -42,6 +43,18 @@ namespace FirstGameNiteJam
         public void GoRight(bool isPressed)
         {
             Right = isPressed;
+        }
+
+        public void OnMove(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+                var mov = value.ReadValue<Vector2>();
+                GoForward(mov.y > .5f);
+                GoBackward(mov.y < -.5f);
+                GoLeft(mov.x < -.5f);
+                GoRight(mov.x > .5f);
+            }
         }
     }
 }
