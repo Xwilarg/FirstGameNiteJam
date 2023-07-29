@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,9 @@ namespace FirstGameNiteJam
 
         [SerializeField]
         private Transform[] _spawnPoints;
+
+        [SerializeField]
+        private TMP_Text _timer;
 
         public static GameManager Instance { private set; get; }
 
@@ -51,7 +55,7 @@ namespace FirstGameNiteJam
 
         public void SendMessageToClient(string client, string msg)
         {
-            _net.SendMessage(client, msg);
+            _net.SendMessageToClient(client, msg);
         }
 
         public void Register(TankController tc)

@@ -96,20 +96,16 @@ function drawController(canvas, ctx) {
     g_ctx = ctx;
     
     canvas.width = window.innerWidth-1;
-    canvas.height = window.innerHeight-1;4
-    if (g_playerType === null) {
-        ctx.fillStyle = "#808080";
-    } else if (g_playerType === 0) {
-        ctx.fillStyle = "#808090";
+    canvas.height = window.innerHeight-1;
+    let color = "10, 10, 10";
+    if (g_playerType === 0) {
+        color = "10, 255, 10";
     } else if (g_playerType === 1) {
-        ctx.fillStyle = "#908080";
+        color = "255, 10, 10";
     }
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const yellow = 'rgba(220, 200, 70, .9)';
-    const faded_yellow = 'rgba(220, 200, 70, .2)';
-    const red = 'rgba(230, 120, 70, 1)';
-    const green = 'rgba(120, 220, 100, 1)';
+    const yellow = `rgba(${color}, .9)`;
+    const faded_yellow = `rgba(${color}, .2)`;
 
     
     const w = canvas.width;
@@ -147,7 +143,7 @@ function drawController(canvas, ctx) {
             {'x': down_x-10, 'y':down_y, 'w':thic1+20, 'h':thic2+10, 'color':yellow},
             {'x': left_x-10, 'y':left_y-10, 'w':thic2+10, 'h':thic1+20, 'color':yellow},
             {'x': right_x, 'y':right_y-10, 'w':thic2+10, 'h':thic1+20, 'color':yellow},
-            {'x': action_x-10, 'y':action_y-10,'w':sq1+20, 'h':sq1+20,   'color':red}
+            {'x': action_x-10, 'y':action_y-10,'w':sq1+20, 'h':sq1+20,   'color':yellow}
             
         ]
     }
