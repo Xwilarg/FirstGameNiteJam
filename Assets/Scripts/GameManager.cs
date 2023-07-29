@@ -9,19 +9,28 @@ namespace FirstGameNiteJam
         [SerializeField]
         private GameObject _tank;
 
+        [SerializeField]
+        private GameObject _preparationUI;
+
         public static GameManager Instance { private set; get; }
 
         public readonly Dictionary<string, TankController> _controllers = new();
 
+        private int _playerJoined;
         private bool _isAttacker = true;
         public bool IsAttacker
         {
             get
             {
+                _playerJoined++;
                 if (_isAttacker)
                 {
                     _isAttacker = false;
                     return true;
+                }
+                if (_playerJoined == 2)
+                {
+                    _preparationUI.SetActive(false);
                 }
                 return false;
             }
