@@ -37,7 +37,7 @@ namespace FirstGameNiteJam
         {
             GameManager.Instance.Register(this);
             _isAttacker = GameManager.Instance.IsAttacker;
-            GameManager.Instance.SendMessageToClient(ClientId, _isAttacker.Value ? "ATT1" : "ATT0");
+            //GameManager.Instance.SendMessageToClient(ClientId, _isAttacker.Value ? "ATT1" : "ATT0");
         }
 
         private void FixedUpdate()

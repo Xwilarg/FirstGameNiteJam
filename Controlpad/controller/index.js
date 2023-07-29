@@ -115,9 +115,11 @@ ws.onopen = (event) => {
         }
     });
 
+/*
     window.addEventListener('click', (event) => {
         handleClick(event.clientX, event.clientY);
     });
+*/
 
     function draw_image(image, x, y, scalex, scaley, cx, cy, rotation) {
         ctx.setTransform(scalex, 0, 0, scaley, x, y); // sets scale and origin
