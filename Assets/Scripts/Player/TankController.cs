@@ -13,6 +13,8 @@ namespace FirstGameNiteJam
         [SerializeField]
         private PlayerInfo _info;
 
+        public string ClientId { set; get; }
+
         private Rigidbody _rb;
         private bool Down, Up, Right, Left;
 
@@ -34,6 +36,7 @@ namespace FirstGameNiteJam
         private void Start()
         {
             _isAttacker = GameManager.Instance.IsAttacker;
+            GameManager.Instance.SendMessageToClient(ClientId, _isAttacker.Value ? "ATT1" : "ATT0");
         }
 
         private void FixedUpdate()

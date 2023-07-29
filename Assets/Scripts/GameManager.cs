@@ -14,6 +14,8 @@ namespace FirstGameNiteJam
 
         public static GameManager Instance { private set; get; }
 
+        private controlpads_glue _net;
+
         public readonly Dictionary<string, TankController> _controllers = new();
 
         private int _playerJoined;
@@ -39,6 +41,12 @@ namespace FirstGameNiteJam
         private void Awake()
         {
             Instance = this;
+            _net = GetComponent<controlpads_glue>();
+        }
+
+        public void SendMessageToClient(string client, string msg)
+        {
+            _net.SendMessage(client, msg);
         }
 
         public void HandleMessage(string id, string msg)
@@ -47,6 +55,7 @@ namespace FirstGameNiteJam
             {
                 var go = Instantiate(_tank, Vector3.zero, Quaternion.identity);
                 go.GetComponent<PlayerInput>().enabled = false;
+                go.GetComponent<TankController>().ClientId = id;
                 _controllers.Add(id, go.GetComponent<TankController>());
             }
 

@@ -69,7 +69,7 @@ public class controlpads_glue : MonoBehaviour
                 _onMessage.Invoke(client, msg);
                 string s = string.Format("{0} said: {1}", client, msg);
                 Debug.Log(s);
-                SendMessage(client, s);
+                SendMessageToClient(client, s);
             }
         }
     }
@@ -99,7 +99,7 @@ public class controlpads_glue : MonoBehaviour
         return handles;
     }
 
-    public void SendMessage(string client, string message)
+    public void SendMessageToClient(string client, string message)
     {
         ControlpadsLibrary.send_message(client, message);
     }

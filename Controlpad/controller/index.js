@@ -43,6 +43,7 @@ ctx.fillText("Touch", 100, 100);
 
 
 function screenChange() {
+    refresh();
     /*
     canvas.width = window.innerWidth-1;
     canvas.height = window.innerHeight-1;
@@ -85,6 +86,8 @@ ws.onopen = (event) => {
     ws.send(byte_array.buffer);
 
     ws.addEventListener('message', (event) => {
+        msg = event.data;
+        handleMessage(msg);
     });
 
 

@@ -5,6 +5,9 @@ let global_spec;
 // ---- Globals ----
 
 var messages = [];
+var g_canvas;
+var g_ctx;
+var g_playerType = null;
 
 // ---- Messages ----
 
@@ -72,9 +75,37 @@ function controlpadStart(width, height) {
 function controlpadUpdate() {
 }
 
+function handleMessage(msg) {
+    console.log(msg);
+    if (msg === "ATT1") {
+        g_playerType = 1;
+        refresh();
+    }
+    if (msg === "ATT0") {
+        g_playerType = 0;
+        refresh();
+    }
+}
 
+function refresh() {
+    drawController(g_canvas, g_ctx);
+}
 // Inspired from https://github.com/RecBox-Games/controlpad_test_server/blob/main/controller/index.html
 function drawController(canvas, ctx) {
+    g_canvas = canvas;
+    g_ctx = ctx;
+    
+    canvas.width = window.innerWidth-1;
+    canvas.height = window.innerHeight-1;4
+    if (g_playerType === null) {
+        ctx.fillStyle = "#808080";
+    } else if (g_playerType === 0) {
+        ctx.fillStyle = "#808090";
+    } else if (g_playerType === 1) {
+        ctx.fillStyle = "#908080";
+    }
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     const yellow = 'rgba(220, 200, 70, .9)';
     const faded_yellow = 'rgba(220, 200, 70, .2)';
     const red = 'rgba(230, 120, 70, 1)';

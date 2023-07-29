@@ -55,7 +55,7 @@ namespace FirstGameNiteJam.Menu
         public void OnMessage(string _, string msg)
         {
             var data = msg.Split(";");
-            if (data.Length == 2 && data[1] == "0")
+            if (data.Length == 2 && data[1] == "1")
             {
                 switch (data[0])
                 {
