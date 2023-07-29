@@ -8,6 +8,9 @@ namespace FirstGameNiteJam
         private Rigidbody _rb;
         private bool Down, Up, Right, Left;
 
+        private bool _canShoot;
+        private const float _reloadTime = 1f;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -54,6 +57,13 @@ namespace FirstGameNiteJam
                 GoBackward(mov.y < -.5f);
                 GoLeft(mov.x < -.5f);
                 GoRight(mov.x > .5f);
+            }
+            else if (value.phase == InputActionPhase.Canceled)
+            {
+                GoForward(false);
+                GoBackward(false);
+                GoLeft(false);
+                GoRight(false);
             }
         }
     }
