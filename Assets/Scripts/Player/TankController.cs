@@ -1,3 +1,5 @@
+using System.Collections;
+using TouhouPrideGameJam5.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,17 +7,33 @@ namespace FirstGameNiteJam
 {
     public class TankController : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _bulletPrefab;
+
+        [SerializeField]
+        private PlayerInfo _info;
+
         private Rigidbody _rb;
         private bool Down, Up, Right, Left;
 
-        private bool _canShoot;
+        private bool _canShoot = true;
         private const float _reloadTime = 1f;
 
+        [SerializeField] private GameObject decoy;
+        private Transform currentDecoy;
+        private Rigidbody rbDecoy;
+
         private bool _isAttacker;
+        private int _health;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            _health = _info.BaseHealth;
+        }
+
+        private void Start()
+        {
             _isAttacker = GameManager.Instance.IsAttacker;
         }
 
@@ -27,8 +45,24 @@ namespace FirstGameNiteJam
             if (Right) v.x += 1;
             if (Left) v.x -= 1;
 
-            _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * 100f;
-            _rb.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * 100f, 0f);
+            _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
+            transform.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+
+            if(currentDecoy != null)
+            {
+                rbDecoy.velocity = currentDecoy.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
+                currentDecoy.rotation = Quaternion.Euler(0f, rbDecoy.rotation.eulerAngles.y - v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+            }
+        }
+
+        public void TakeDamage()
+        {
+            _health--;
+            if (_health == 0)
+            {
+                Debug.Log("Dead");
+                // TODO: Dead
+            }
         }
 
         public void GoForward(bool isPressed)
@@ -55,12 +89,26 @@ namespace FirstGameNiteJam
         {
             if (_isAttacker)
             {
-                // TODO: Shoot
+                if (_canShoot)
+                {
+                    var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
+                    bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
+                    Destroy(bullet, 5f);
+                    StartCoroutine(Reload());
+                }
             }
             else
             {
-                // TODO: Decoy
+                currentDecoy = Instantiate(decoy,transform.position,transform.rotation,null).transform;
+                rbDecoy = currentDecoy.GetComponent<Rigidbody>();
             }
+        }
+
+        private IEnumerator Reload()
+        {
+            _canShoot = false;
+            yield return new WaitForSeconds(_reloadTime);
+            _canShoot = true;
         }
 
         public void OnMove(InputAction.CallbackContext value)
