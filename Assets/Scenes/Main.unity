@@ -233,6 +233,8 @@ MonoBehaviour:
   - {fileID: 2106047734}
   - {fileID: 1374028942}
   - {fileID: 1214723777}
+  _timer: {fileID: 1485789561}
+  _info: {fileID: 11400000, guid: a9f5c178cf77b354eafbc18ca32c2da2, type: 2}
 --- !u!1 &450993970
 GameObject:
   m_ObjectHideFlags: 0

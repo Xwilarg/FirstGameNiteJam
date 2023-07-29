@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using TouhouPrideGameJam5.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,11 @@ namespace FirstGameNiteJam
 
         [SerializeField]
         private TMP_Text _timer;
+
+        [SerializeField]
+        private GameInfo _info;
+
+        private float? _timerVal;
 
         public static GameManager Instance { private set; get; }
 
@@ -42,6 +48,7 @@ namespace FirstGameNiteJam
                 if (_playerJoined == 2)
                 {
                     _preparationUI.SetActive(false);
+                    _timerVal = _info.RoundDuration;
                 }
                 return false;
             }
@@ -51,6 +58,19 @@ namespace FirstGameNiteJam
         {
             Instance = this;
             _net = GetComponent<controlpads_glue>();
+        }
+
+        private void Update()
+        {
+            if (_timerVal != null)
+            {
+                _timerVal -= Time.deltaTime;
+                _timer.text = $"{(int)_timerVal.Value}";
+                if (_timerVal <= 0)
+                {
+                    // TODO: GameOver
+                }
+            }
         }
 
         public void SendMessageToClient(string client, string msg)
