@@ -1,5 +1,25 @@
 {
     "key": "Français",
 
-    "language": "Langue :"
+    "language": "Langue :",
+
+    "2d": "2D :",
+    "3d": "3D :",
+    "audio": "Audio :",
+    "programming": "Programmation :",
+
+    "rules": "Règles :",
+    "rulesEx0": "Le premier joueur connecté doit chasser les autres",
+    "rulesEx1": "Si le timer atteint 0, il a perdu",
+    "rulesEx2": "Déplacez vous avec la croix directionnelle",
+    "rulesEx3": "Le chasseur peut tirer avec le bouton d'action",
+    "rulesEx4": "Les fuilleurs peuvent lancer un leur avec",
+
+    "play": "Jouer",
+    "help": "Aide",
+    "credits": "Crédits",
+    "quit": "Quitter",
+
+    "pressAnyKey": "Appuyez sur une touche pour rejoindre",
+    "waitingPlayers": "En attente d'au moins 2 joueurs..."
 }

@@ -1,5 +1,25 @@
 {
     "key": "English",
 
-    "language": "Language:"
+    "language": "Language:",
+
+    "2d": "2D:",
+    "3d": "3D:",
+    "audio": "Audio:",
+    "programming": "Programming:",
+
+    "rules": "Rules:",
+    "rulesEx0": "First player connected need to chase the others",
+    "rulesEx1": "If timer reach 0, he loose",
+    "rulesEx2": "Move with D-Pad",
+    "rulesEx3": "Chaser can shoot with action button",
+    "rulesEx4": "Runners can launch a decoy with it",
+
+    "play": "Play",
+    "help": "Help",
+    "credits": "Credits",
+    "quit": "Quit",
+
+    "pressAnyKey": "Press any key to join",
+    "waitingPlayers": "Waiting for at least 2 players..."
 }
