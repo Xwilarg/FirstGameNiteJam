@@ -30,7 +30,7 @@ namespace FirstGameNiteJam
             if (data.Length == 2)
             {
                 bool isPressed = data[1] == "1";
-                switch (msg)
+                switch (data[0])
                 {
                     case "{up}": target.GoForward(isPressed); break;
                     case "{down}": target.GoBackward(isPressed); break;

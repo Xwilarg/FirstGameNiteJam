@@ -20,11 +20,14 @@ namespace FirstGameNiteJam
             if (Left) dir.x += 1;
             if (Right) dir.x -= 1;
 
+            Debug.Log(dir);
+
             _rb.velocity = (Vector2)dir * Time.fixedDeltaTime * 100f;
         }
 
         public void GoForward(bool isPressed)
         {
+            Debug.Log(isPressed);
             Up = isPressed;
         }
 
