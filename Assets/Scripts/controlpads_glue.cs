@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
 using FirstGameNiteJam;
+using UnityEngine.Events;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct c_flat_string_vec
@@ -15,6 +16,7 @@ public struct c_flat_string_vec
     public UInt64 lens_cap;
 }
 
+#if UNITY_STANDALONE_WIN
 public class ControlpadsLibrary
 {
     [DllImport("c_sharp_controlpads.dll")]
@@ -28,11 +30,29 @@ public class ControlpadsLibrary
     [DllImport("c_sharp_controlpads.dll")]
     public static extern int get_messages([MarshalAs(UnmanagedType.LPStr)] string client, ref c_flat_string_vec messages);
 }
+#elif UNITY_STANDALONE_LINUX
+public class ControlpadsLibrary {
+    [DllImport("libc_sharp_controlpads.so")]
+    public static extern int free_c_flat_string_vec(c_flat_string_vec c_flat);
+    [DllImport("libc_sharp_controlpads.so")]
+    public static extern int clients_changed(ref bool did_change);
+    [DllImport("libc_sharp_controlpads.so")]
+    public static extern int get_client_handles(ref c_flat_string_vec client_handles);
+    [DllImport("libc_sharp_controlpads.so")]
+    public static extern int send_message([MarshalAs(UnmanagedType.LPStr)] string client, [MarshalAs(UnmanagedType.LPStr)] string msg);
+    [DllImport("libc_sharp_controlpads.so")]
+    public static extern int get_messages([MarshalAs(UnmanagedType.LPStr)] string client, ref c_flat_string_vec messages);
+}
+#endif
+
 
 
 
 public class controlpads_glue : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent<string, string> _onMessage;
+
     List<string> clientHandles = new List<string>();
 
     // Update is called once per frame
@@ -47,7 +67,6 @@ public class controlpads_glue : MonoBehaviour
         {
             foreach (string msg in GetMessages(client))
             {
-                GameManager.Instance.HandleMessage(client, msg);
                 string s = string.Format("{0} said: {1}", client, msg);
                 Debug.Log(s);
                 SendMessage(client, s);
