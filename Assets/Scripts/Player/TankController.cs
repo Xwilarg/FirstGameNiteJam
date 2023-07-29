@@ -20,7 +20,7 @@ namespace FirstGameNiteJam
             if (Right) v.x += 1;
             if (Left) v.x -= 1;
 
-            _rb.velocity = new(0f, 0f, v.y * Time.fixedDeltaTime * 100f);
+            _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * 100f;
             _rb.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * 100f, 0f);
         }
 
