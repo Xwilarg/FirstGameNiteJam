@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
+using FirstGameNiteJam;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct c_flat_string_vec
@@ -46,6 +47,7 @@ public class controlpads_glue : MonoBehaviour
         {
             foreach (string msg in GetMessages(client))
             {
+                GameManager.Instance.HandleMessage(client, msg);
                 string s = string.Format("{0} said: {1}", client, msg);
                 Debug.Log(s);
                 SendMessage(client, s);

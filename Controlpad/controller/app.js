@@ -37,8 +37,8 @@ function getTouchId(x, y, callback) {
 // Handle a single touch as it starts
 function handleTouchStart(id, x, y) {
     let msg = "TouchStart(" + x.toString() + "," + y.toString() + ")";
-    getTouchId(x, y, (id) => {
-        messages.push(`{${id}};0`);
+    getTouchId(x, y, (bid) => {
+        messages.push(`{${bid}};1`);
     });
 }
 
@@ -51,8 +51,8 @@ function handleTouchMove(id, x, y) {
 // Handle a single touch that has ended
 function handleTouchEnd(id, x, y) {
     let msg = "TouchEnd(" + x.toString() + "," + y.toString() + ")";
-    getTouchId(x, y, (id) => {
-        messages.push(`{${id}};1`);
+    getTouchId(x, y, (bid) => {
+        messages.push(`{${bid}};0`);
     });
 }
 
