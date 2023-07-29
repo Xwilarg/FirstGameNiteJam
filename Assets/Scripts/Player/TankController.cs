@@ -35,6 +35,7 @@ namespace FirstGameNiteJam
 
         private void Start()
         {
+            GameManager.Instance.Register(this);
             _isAttacker = GameManager.Instance.IsAttacker;
             GameManager.Instance.SendMessageToClient(ClientId, _isAttacker.Value ? "ATT1" : "ATT0");
         }

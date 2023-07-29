@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,11 +13,15 @@ namespace FirstGameNiteJam
         [SerializeField]
         private GameObject _preparationUI;
 
+        [SerializeField]
+        private Transform[] _spawnPoints;
+
         public static GameManager Instance { private set; get; }
 
         private controlpads_glue _net;
 
-        public readonly Dictionary<string, TankController> _controllers = new();
+        private readonly Dictionary<string, TankController> _controllers = new();
+        private List<TankController> _registeredTanks = new();
 
         private int _playerJoined;
         private bool _isAttacker = true;
@@ -47,6 +52,15 @@ namespace FirstGameNiteJam
         public void SendMessageToClient(string client, string msg)
         {
             _net.SendMessage(client, msg);
+        }
+
+        public void Register(TankController tc)
+        {
+            var furthestPos = _registeredTanks.Any()
+                ? _spawnPoints.OrderByDescending(x => _registeredTanks.Min(t => Vector3.Distance(x.position, t.transform.position))).ElementAt(0)
+                : _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+            tc.transform.position = furthestPos.position;
+            _registeredTanks.Add(tc);
         }
 
         public void HandleMessage(string id, string msg)
