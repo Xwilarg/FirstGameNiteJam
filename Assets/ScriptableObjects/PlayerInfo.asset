@@ -16,3 +16,5 @@ MonoBehaviour:
   AngularSpeed: 100
   BulletForce: 10
   BaseHealth: 3
+  ShootReloadTime: 1
+  SkillReloadTime: 3

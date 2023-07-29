@@ -82,9 +82,9 @@ function drawController(canvas, ctx) {
 
     
     const w = canvas.width;
+    const h = canvas.height;
     const aw = w*.45;
     const bw = w - aw;
-    const h = canvas.height;
     // dpad
     const thic1 = h*.125;
     const thic2 = h*.15;

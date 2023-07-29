@@ -16,8 +16,11 @@ namespace FirstGameNiteJam
         private Rigidbody _rb;
         private bool Down, Up, Right, Left;
 
-        private bool _canShoot = true;
-        private const float _reloadTime = 1f;
+        private bool _canDoAction = true;
+
+        [SerializeField] private GameObject decoy;
+        private Transform currentDecoy;
+        private Rigidbody rbDecoy;
 
         private bool _isAttacker;
         private int _health;
@@ -43,6 +46,12 @@ namespace FirstGameNiteJam
 
             _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
             transform.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+
+            if(currentDecoy != null)
+            {
+                rbDecoy.velocity = currentDecoy.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
+                currentDecoy.rotation = Quaternion.Euler(0f, rbDecoy.rotation.eulerAngles.y - v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+            }
         }
 
         public void TakeDamage()
@@ -77,27 +86,29 @@ namespace FirstGameNiteJam
 
         public void DoAction()
         {
-            if (_isAttacker)
+            if (_canDoAction)
             {
-                if (_canShoot)
+                if (_isAttacker)
                 {
                     var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
                     bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
                     Destroy(bullet, 5f);
-                    StartCoroutine(Reload());
+                    StartCoroutine(Reload(_info.ShootReloadTime));
                 }
-            }
-            else
-            {
-                // TODO: Decoy
+                else
+                {
+                    currentDecoy = Instantiate(decoy, transform.position, transform.rotation, null).transform;
+                    rbDecoy = currentDecoy.GetComponent<Rigidbody>();
+                    StartCoroutine(Reload(_info.SkillReloadTime));
+                }
             }
         }
 
-        private IEnumerator Reload()
+        private IEnumerator Reload(float reloadTime)
         {
-            _canShoot = false;
-            yield return new WaitForSeconds(_reloadTime);
-            _canShoot = true;
+            _canDoAction = false;
+            yield return new WaitForSeconds(reloadTime);
+            _canDoAction = true;
         }
 
         public void OnMove(InputAction.CallbackContext value)
