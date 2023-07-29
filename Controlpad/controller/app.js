@@ -98,20 +98,25 @@ function drawController(canvas, ctx) {
     const left_y = dpad_y-thic1/2;
     const right_x = dpad_x+thic1*.8;
     const right_y = dpad_y-thic1/2;
+    const sq1 = bw*.45;
+    const action_x = w-sq1-bw/12;
+    const action_y = (h-sq1)/2;
 
     global_spec = {
         'buttons': [
             {'x':up_x,    'y':up_y,   'w':thic1, 'h':thic2, 'id':'up'},
             {'x':down_x,  'y':down_y, 'w':thic1, 'h':thic2, 'id':'down'},
             {'x':left_x,  'y':left_y, 'w':thic2, 'h':thic1, 'id':'left'},
-            {'x':right_x, 'y':right_y,'w':thic2, 'h':thic1, 'id':'right'}
+            {'x':right_x, 'y':right_y,'w':thic2, 'h':thic1, 'id':'right'},
+            {'x':action_x, 'y':action_y,'w':sq1, 'h':sq1,   'id':'action'}
         ],
         'panels': [
             {'x': dpad_x-thic1/2, 'y':dpad_y-thic1/2, 'w':thic1, 'h':thic1, 'color':faded_yellow},
             {'x': up_x-10, 'y':up_y-10, 'w':thic1+20, 'h':thic2+10, 'color':yellow},
             {'x': down_x-10, 'y':down_y, 'w':thic1+20, 'h':thic2+10, 'color':yellow},
             {'x': left_x-10, 'y':left_y-10, 'w':thic2+10, 'h':thic1+20, 'color':yellow},
-            {'x': right_x, 'y':right_y-10, 'w':thic2+10, 'h':thic1+20, 'color':yellow}
+            {'x': right_x, 'y':right_y-10, 'w':thic2+10, 'h':thic1+20, 'color':yellow},
+            {'x': action_x-10, 'y':action_y-10,'w':sq1+20, 'h':sq1+20,   'color':red}
             
         ]
     }
