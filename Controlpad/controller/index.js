@@ -43,6 +43,7 @@ ctx.fillText("Touch", 100, 100);
 
 
 function screenChange() {
+    /*
     canvas.width = window.innerWidth-1;
     canvas.height = window.innerHeight-1;
 
@@ -50,6 +51,7 @@ function screenChange() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     console.log('resize fill');
     onFlip(window.innerWidth, window.innerHeight);
+    */
 }    
 
 window.onresize = screenChange;
