@@ -6,5 +6,6 @@ namespace TouhouPrideGameJam5.SO
     public class PlayerInfo : ScriptableObject
     {
         public float LinearSpeed, AngularSpeed;
+        public float BulletForce;
     }
 }

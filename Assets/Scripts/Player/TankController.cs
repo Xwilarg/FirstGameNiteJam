@@ -16,7 +16,7 @@ namespace FirstGameNiteJam
         private Rigidbody _rb;
         private bool Down, Up, Right, Left;
 
-        private bool _canShoot;
+        private bool _canShoot = true;
         private const float _reloadTime = 1f;
 
         private bool _isAttacker;
@@ -65,6 +65,9 @@ namespace FirstGameNiteJam
             {
                 if (_canShoot)
                 {
+                    var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
+                    bullet.GetComponent<Rigidbody>().AddForce((transform.forward + Vector3.up).normalized * _info.BulletForce, ForceMode.Impulse);
+                    Destroy(bullet, 5f);
                     StartCoroutine(Reload());
                 }
             }

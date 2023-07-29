@@ -13,7 +13,7 @@ namespace FirstGameNiteJam
 
         public readonly Dictionary<string, TankController> _controllers = new();
 
-        private bool _isAttacker;
+        private bool _isAttacker = true;
         public bool IsAttacker
         {
             get

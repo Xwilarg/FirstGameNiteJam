@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LinearSpeed: 100
   AngularSpeed: 100
+  BulletForce: 10
