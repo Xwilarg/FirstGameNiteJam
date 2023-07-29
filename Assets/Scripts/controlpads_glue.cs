@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
-using FirstGameNiteJam;
 using UnityEngine.Events;
 
 [StructLayout(LayoutKind.Sequential)]
@@ -67,6 +66,7 @@ public class controlpads_glue : MonoBehaviour
         {
             foreach (string msg in GetMessages(client))
             {
+                _onMessage.Invoke(client, msg);
                 string s = string.Format("{0} said: {1}", client, msg);
                 Debug.Log(s);
                 SendMessage(client, s);
