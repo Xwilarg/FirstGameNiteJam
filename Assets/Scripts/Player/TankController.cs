@@ -25,8 +25,12 @@ namespace FirstGameNiteJam
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-            _isAttacker = GameManager.Instance.IsAttacker;
             _health = _info.BaseHealth;
+        }
+
+        private void Start()
+        {
+            _isAttacker = GameManager.Instance.IsAttacker;
         }
 
         private void FixedUpdate()
