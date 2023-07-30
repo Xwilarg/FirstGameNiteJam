@@ -138,6 +138,11 @@ namespace FirstGameNiteJam
             Right = false;
             _rb.velocity = Vector3.zero;
             _canDoAction = true;
+
+            if (ClientId != null)
+            {
+                GameManager.Instance.SendMessageToClient(ClientId, "RESET");
+            }
         }
 
         private void Start()

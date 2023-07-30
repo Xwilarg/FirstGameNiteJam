@@ -17,9 +17,25 @@ let c_up = 0;
 let c_down = 0;
 let c_action = 0;
 
+function resetControls() {
+    c_left = 0;
+    c_right = 0;
+    c_up = 0;
+    c_down = 0;
+    c_action = 0;
+}
+
 function setControl(id, isPressed) {
-    if (id === "up") c_up = isPressed;
-    else if (id === "down") c_down = isPressed;
+    if (id === "up") {
+        if (!isPressed) return;
+        c_up = c_up === 1 ? 0 : 1;
+        if (c_up === 1) c_down = 0;
+    }
+    else if (id === "down") {
+        if (!isPressed) return;
+        c_down = c_down === 1 ? 0 : 1;
+        if (c_down === 1) c_up = 0;
+    }
     else if (id === "left") c_left = isPressed;
     else if (id === "right") c_right = isPressed;
     else if (id === "action") c_action = isPressed;
@@ -126,6 +142,8 @@ function handleMessage(msg) {
         const data = msg.split(';');
         g_playerType = `${data[2]}, ${data[3]}, ${data[4]}`;
         refresh();
+    } else if (msg === "RESET") {
+        resetControls();
     }
 }
 
@@ -233,7 +251,7 @@ function drawController(canvas, ctx) {
     global_spec.buttons.forEach(function (b, i) {
         ctx.beginPath();
         if (isControlPressed(b.id)) {
-        ctx.fillStyle = 'rgb(190,190,190)';
+        ctx.fillStyle = 'rgb(150,150,150)';
         } else {
         ctx.fillStyle = 'rgb(230,230,230)';
         }
