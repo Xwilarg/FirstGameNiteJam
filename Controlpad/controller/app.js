@@ -202,8 +202,15 @@ function drawController(canvas, ctx) {
     const aw = lw*.45;
     const bw = lw - aw;
     // dpad
-    const thic1 = lh*.125;
-    const thic2 = lh*.15;
+    let thic1;
+    let thic2;
+    if (w > h) {
+        thic1 = lh*.2;
+        thic2 = lh*.2;
+    } else {
+        thic1 = lh*.125;
+        thic2 = lh*.15;
+    }
     const dpad_x = aw/2;
     const dpad_y = h/2;
     const up_x = dpad_x-thic1/2;
