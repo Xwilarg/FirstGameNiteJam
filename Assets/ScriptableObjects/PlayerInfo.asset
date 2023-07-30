@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7a02c43d5830a45abadf18776b7d1d, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  LinearSpeed: 100
+  LinearSpeed: 200
   AngularSpeed: 100
   BulletForce: 10
   BaseHealth: 3
