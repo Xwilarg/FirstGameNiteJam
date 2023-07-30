@@ -76,7 +76,8 @@ namespace FirstGameNiteJam
             DidWin = false;
 
             // Randomize tank position and role
-            foreach (var tc in _registeredTanks)
+            var prevAttacker = _registeredTanks.FirstOrDefault(x => x.IsAttacker.HasValue && x.IsAttacker.Value).gameObject.GetInstanceID();
+            foreach (var tc in _registeredTanks.Where(x => x.gameObject.GetInstanceID() != prevAttacker))
             {
                 SetPosition(tc);
                 tc.ResetTank(true);
