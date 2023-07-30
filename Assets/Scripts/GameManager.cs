@@ -6,6 +6,7 @@ using TMPro;
 using TouhouPrideGameJam5.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace FirstGameNiteJam
 {
@@ -82,6 +83,34 @@ namespace FirstGameNiteJam
             _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
         }
 
+        private IEnumerator PrepareBackToMenu()
+        {
+            _startingText.gameObject.SetActive(true);
+            foreach (var tc in _registeredTanks)
+            {
+                SetPosition(tc);
+                if (tc.Victories == 3)
+                {
+                    tc.IsAttacker = true;
+                    tc.ResetTank(false);
+                }
+                else
+                {
+                    tc.IsAttacker = false;
+                    tc.Unarmed = true;
+                    tc.ResetTank(true);
+                }
+            }
+
+            for (int i = 0; i < _info.TimeBeforeRound; i++)
+            {
+                _startingText.text = $"{Translate.Instance.Tr("backToMenu")} {_info.TimeBeforeRound - i}...";
+                yield return new WaitForSeconds(1f);
+            }
+
+            SceneManager.LoadScene("MainMenu");
+        }
+
         private void Awake()
         {
             Instance = this;
@@ -130,7 +159,14 @@ namespace FirstGameNiteJam
                         }
                     }
                 }
-                StartCoroutine(ResetGame());
+                if (_registeredTanks.Any(x => x.Victories == 3))
+                {
+                    StartCoroutine(PrepareBackToMenu());
+                }
+                else
+                {
+                    StartCoroutine(ResetGame());
+                }
             }
         }
 

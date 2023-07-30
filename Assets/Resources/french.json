@@ -22,5 +22,6 @@
 
     "pressAnyKey": "Appuyez sur une touche pour rejoindre",
     "waitingPlayers": "En attente d'au moins 2 joueurs...",
-    "starting": "La partie démarre dans"
+    "starting": "La partie démarre dans",
+    "backToMenu": "Retour au menu dans"
 }

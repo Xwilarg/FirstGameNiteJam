@@ -44,7 +44,10 @@ namespace FirstGameNiteJam
         private Transform _currentDecoy;
         private Rigidbody _rbDecoy;
 
+        public int Victories { private set; get; }
+
         public bool IsControllerPhone { set; get; }
+        public bool Unarmed { set; get; }
 
         private Color _color;
 
@@ -110,9 +113,10 @@ namespace FirstGameNiteJam
             }
             var t = Instantiate(_trophy, _trophyHContainer);
             t.GetComponent<Image>().sprite = targetSprite;
+            Victories++;
         }
 
-        public void ResetTank()
+        public void ResetTank(bool removeWin)
         {
             _health = _info.BaseHealth;
             IsAttacker = false;
@@ -123,7 +127,15 @@ namespace FirstGameNiteJam
                 Destroy(d);
             }
             _decoysList.Clear();
-            _vCanvas.SetActive(false);
+            if (removeWin)
+            {
+                _vCanvas.SetActive(false);
+            }
+
+            Up = false;
+            Down = false;
+            Left = false;
+            Right = false;
         }
 
         private void Start()
@@ -152,6 +164,7 @@ namespace FirstGameNiteJam
 
         public void TakeDamage()
         {
+            if (IsAttacker.HasValue && IsAttacker.Value) return;
             if (GameManager.Instance.DidWin) return;
             _health--;
             if (_health == 0)
@@ -204,6 +217,7 @@ namespace FirstGameNiteJam
 
         public void DoAction()
         {
+            if (Unarmed) return;
             if (_canDoAction && IsAttacker.HasValue)
             {
                 if (IsAttacker.Value)

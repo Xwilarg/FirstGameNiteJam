@@ -22,5 +22,6 @@
 
     "pressAnyKey": "Press any key to join",
     "waitingPlayers": "Waiting for at least 2 players...",
-    "starting": "Game starting in"
+    "starting": "Game starting in",
+    "backToMenu": "Going back to menu in"
 }
