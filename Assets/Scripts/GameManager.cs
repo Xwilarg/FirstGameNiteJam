@@ -78,7 +78,7 @@ namespace FirstGameNiteJam
             foreach (var tc in _registeredTanks)
             {
                 SetPosition(tc);
-                tc.ResetTank();
+                tc.ResetTank(true);
             }
             _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
         }
@@ -89,7 +89,7 @@ namespace FirstGameNiteJam
             foreach (var tc in _registeredTanks)
             {
                 SetPosition(tc);
-                if (tc.Victories == 3)
+                if (tc.Victories == _info.PointsBeforeVictory)
                 {
                     tc.IsAttacker = true;
                     tc.ResetTank(false);
@@ -159,7 +159,7 @@ namespace FirstGameNiteJam
                         }
                     }
                 }
-                if (_registeredTanks.Any(x => x.Victories == 3))
+                if (_registeredTanks.Any(x => x.Victories == _info.PointsBeforeVictory))
                 {
                     StartCoroutine(PrepareBackToMenu());
                 }

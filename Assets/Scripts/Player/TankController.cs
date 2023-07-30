@@ -136,6 +136,7 @@ namespace FirstGameNiteJam
             Down = false;
             Left = false;
             Right = false;
+            _rb.velocity = Vector3.zero;
         }
 
         private void Start()

@@ -7,5 +7,6 @@ namespace TouhouPrideGameJam5.SO
     {
         public float RoundDuration;
         public float TimeBeforeRound;
+        public int PointsBeforeVictory;
     }
 }
