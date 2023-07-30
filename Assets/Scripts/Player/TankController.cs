@@ -21,11 +21,12 @@ namespace FirstGameNiteJam
 
         private bool _canDoAction = true;
 
-        [SerializeField] private GameObject decoy;
-        private Transform currentDecoy;
-        private Rigidbody rbDecoy;
+        [SerializeField] private GameObject _decoy;
+        private Transform _currentDecoy;
+        private Rigidbody _rbDecoy;
 
-        private readonly List<GameObject> _decoys = new();
+        // I renamed this one because I didn't want to confuse it with _decoy 
+        private readonly List<GameObject> _decoysList = new();
 
         private bool? _isAttacker;
         public bool? IsAttacker
@@ -54,11 +55,11 @@ namespace FirstGameNiteJam
             IsAttacker = false;
 
             // Remove all decoys
-            foreach (var d in _decoys)
+            foreach (var d in _decoysList)
             {
                 Destroy(d);
             }
-            _decoys.Clear();
+            _decoysList.Clear();
         }
 
         private void Start()
@@ -78,10 +79,10 @@ namespace FirstGameNiteJam
             _rb.velocity = transform.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
             transform.rotation = Quaternion.Euler(0f, _rb.rotation.eulerAngles.y + v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
 
-            if(currentDecoy != null)
+            if(_currentDecoy != null)
             {
-                rbDecoy.velocity = currentDecoy.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
-                currentDecoy.rotation = Quaternion.Euler(0f, rbDecoy.rotation.eulerAngles.y - v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
+                _rbDecoy.velocity = _currentDecoy.forward * v.y * Time.fixedDeltaTime * _info.LinearSpeed;
+                _currentDecoy.rotation = Quaternion.Euler(0f, _rbDecoy.rotation.eulerAngles.y - v.x * Time.fixedDeltaTime * _info.AngularSpeed, 0f);
             }
         }
 
@@ -128,10 +129,10 @@ namespace FirstGameNiteJam
                 }
                 else
                 {
-                    currentDecoy = Instantiate(decoy, transform.position, transform.rotation, null).transform;
-                    Destroy(currentDecoy.gameObject, _info.DecoyLifetime);
-                    _decoys.Add(currentDecoy.gameObject);
-                    rbDecoy = currentDecoy.GetComponent<Rigidbody>();
+                    _currentDecoy = Instantiate(_decoy, transform.position, transform.rotation, null).transform;
+                    Destroy(_currentDecoy.gameObject, _info.DecoyLifetime);
+                    _decoysList.Add(_currentDecoy.gameObject);
+                    _rbDecoy = _currentDecoy.GetComponent<Rigidbody>();
                     StartCoroutine(Reload(_info.SkillReloadTime));
                 }
             }
