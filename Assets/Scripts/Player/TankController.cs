@@ -20,6 +20,15 @@ namespace FirstGameNiteJam
         [SerializeField]
         private GameObject _tankChaser, _tankRunner;
 
+        [SerializeField]
+        private GameObject _vCanvas;
+
+        [SerializeField]
+        private Transform _trophyHContainer;
+
+        [SerializeField]
+        private GameObject _trophy;
+
         public string ClientId { set; get; }
 
         private Rigidbody _rb;
@@ -30,6 +39,8 @@ namespace FirstGameNiteJam
         [SerializeField] private GameObject _decoy;
         private Transform _currentDecoy;
         private Rigidbody _rbDecoy;
+
+        public bool IsControllerPhone { set; get; }
 
         private Color _color;
 
@@ -78,6 +89,13 @@ namespace FirstGameNiteJam
             _rb = GetComponent<Rigidbody>();
             _health = _info.BaseHealth;
             _color = new(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+        }
+
+        public void Win()
+        {
+            _vCanvas.SetActive(true);
+            Instantiate(_trophy, _trophyHContainer);
         }
 
         public void ResetTank()
@@ -91,6 +109,7 @@ namespace FirstGameNiteJam
                 Destroy(d);
             }
             _decoysList.Clear();
+            _vCanvas.SetActive(false);
         }
 
         private void Start()
@@ -129,19 +148,33 @@ namespace FirstGameNiteJam
 
         public void GoForward(bool isPressed)
         {
-            if (isPressed)
+            if (IsControllerPhone)
             {
-                Up = !Up;
-                if (Up) Down = false;
+                if (isPressed)
+                {
+                    Up = !Up;
+                    if (Up) Down = false;
+                }
+            }
+            else
+            {
+                Up = isPressed;
             }
         }
 
         public void GoBackward(bool isPressed)
         {
-            if (isPressed)
+            if (IsControllerPhone)
             {
-                Down = !Down;
-                if (Down) Up = false;
+                if (isPressed)
+                {
+                    Down = !Down;
+                    if (Down) Up = false;
+                }
+            }
+            else
+            {
+                Down = isPressed;
             }
         }
 

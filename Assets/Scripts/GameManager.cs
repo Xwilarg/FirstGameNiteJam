@@ -116,6 +116,20 @@ namespace FirstGameNiteJam
         {
             if (!DidWin)
             {
+                if (didAttackerWin)
+                {
+                    _registeredTanks.FirstOrDefault(x => x.IsAttacker.HasValue && x.IsAttacker.Value).Win();
+                }
+                else
+                {
+                    foreach (var tc in _registeredTanks)
+                    {
+                        if (tc.IsAttacker.HasValue && tc.IsAttacker.Value)
+                        {
+                            tc.Win();
+                        }
+                    }
+                }
                 StartCoroutine(ResetGame());
             }
         }
@@ -160,7 +174,9 @@ namespace FirstGameNiteJam
             {
                 var go = Instantiate(_tank, Vector3.zero, Quaternion.identity);
                 go.GetComponent<PlayerInput>().enabled = false;
-                go.GetComponent<TankController>().ClientId = id;
+                var tc = go.GetComponent<TankController>();
+                tc.ClientId = id;
+                tc.IsControllerPhone = true;
                 _controllers.Add(id, go.GetComponent<TankController>());
             }
 
