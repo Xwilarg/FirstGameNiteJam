@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 3521230163132224798, guid: eb0c1038b2f20194c9369bb35f138e07, type: 3}
   _info: {fileID: 11400000, guid: d9d8b07c766e9424eaf02028518c5c07, type: 2}
-  _decoy: {fileID: 0}
+  _decoy: {fileID: 2000490849070120132, guid: 4f16a05d5d01fc04cb53b894a8e5844b, type: 3}
 --- !u!114 &2374787183358739844
 MonoBehaviour:
   m_ObjectHideFlags: 0
