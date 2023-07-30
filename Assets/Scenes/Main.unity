@@ -1251,6 +1251,9 @@ MonoBehaviour:
   - {fileID: 1402074428}
   _timer: {fileID: 1485789561}
   _info: {fileID: 11400000, guid: a9f5c178cf77b354eafbc18ca32c2da2, type: 2}
+  _source: {fileID: 643863191}
+  _waitingBGM: {fileID: 8300000, guid: ecb314d947cbae64cb75c0c878dd8df7, type: 3}
+  _gameBGM: {fileID: 8300000, guid: 2a7207a659f9f3443a162e0810550ff4, type: 3}
 --- !u!1001 &295371401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2504,7 +2507,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2a7207a659f9f3443a162e0810550ff4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ecb314d947cbae64cb75c0c878dd8df7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
