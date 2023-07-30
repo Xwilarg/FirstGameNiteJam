@@ -129,12 +129,20 @@ namespace FirstGameNiteJam
 
         public void GoForward(bool isPressed)
         {
-            Up = isPressed;
+            if (isPressed)
+            {
+                Up = !Up;
+                if (Up) Down = false;
+            }
         }
 
         public void GoBackward(bool isPressed)
         {
-            Down = isPressed;
+            if (isPressed)
+            {
+                Down = !Down;
+                if (Down) Up = false;
+            }
         }
 
         public void GoLeft(bool isPressed)
