@@ -110,12 +110,23 @@ function drawController(canvas, ctx) {
     canvas.width = window.innerWidth-1;
     canvas.height = window.innerHeight-1;
 
-    if (g_loadState === 0) {
+    if (g_loadState < 2) {
         ctx.fillStyle = "#808080";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#000000";
-        ctx.font = "48px serif";
-        ctx.fillText("Game loaded! Click on anywhere on screen to start", 100, 100);
+        if (canvas.width < 500) {
+            ctx.font = "24px serif";
+            ctx.fillText("Game loaded!", 10, 100);
+            ctx.fillText("Click anywhere", 10, 130);
+            ctx.fillText("on screen to start", 10, 160);
+            ctx.fillText("For a better experience,", 10, 300);
+            ctx.fillText("turn your screen", 10, 330);
+            ctx.fillText("in landscape mode!", 10, 360);
+        } else {
+            ctx.font = "30px serif";
+            ctx.fillText("Game loaded!", 100, 100);
+            ctx.fillText("Click anywhere on screen to start", 100, 150);
+        }
         g_loadState = 1;
         return;
     }
