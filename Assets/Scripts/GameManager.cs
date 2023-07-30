@@ -157,7 +157,7 @@ namespace FirstGameNiteJam
                 {
                     foreach (var tc in _registeredTanks)
                     {
-                        if (tc.IsAttacker.HasValue && tc.IsAttacker.Value)
+                        if (tc.IsAttacker.HasValue && !tc.IsAttacker.Value)
                         {
                             tc.Win();
                         }
