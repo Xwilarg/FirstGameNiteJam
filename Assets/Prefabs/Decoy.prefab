@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5188212633337667914}
   - component: {fileID: 7407757433029984546}
   - component: {fileID: 7175870898166755014}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -156,8 +156,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.7, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.1986036, z: 1.884792}
+  m_Center: {x: 0, y: 0.25201175, z: -0.05419606}
 --- !u!1 &5178293242814824572
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 3395710574093430916}
   - component: {fileID: 31124985965788947}
   - component: {fileID: 6055118964769367240}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 813187682982028946}
   - component: {fileID: 4243643709485929766}
   - component: {fileID: 1305943833673611608}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,6 +390,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
       propertyPath: m_Name
       value: Tank2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}

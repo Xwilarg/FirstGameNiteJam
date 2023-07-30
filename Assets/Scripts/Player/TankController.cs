@@ -14,6 +14,12 @@ namespace FirstGameNiteJam
         [SerializeField]
         private PlayerInfo _info;
 
+        [SerializeField]
+        private Transform _gunOut;
+
+        [SerializeField]
+        private GameObject _tankChaser, _tankRunner;
+
         public string ClientId { set; get; }
 
         private Rigidbody _rb;
@@ -34,6 +40,7 @@ namespace FirstGameNiteJam
             set
             {
                 _isAttacker = value;
+                SetModel();
                 if (ClientId != null)
                 {
                     GameManager.Instance.SendMessageToClient(ClientId, IsAttacker.Value ? "ATT1" : "ATT0");
@@ -42,6 +49,24 @@ namespace FirstGameNiteJam
             get => _isAttacker;
         }
         private int _health;
+
+        public void Disable()
+        {
+            _tankChaser.SetActive(false);
+            _tankRunner.SetActive(false);
+        }
+
+        public void SetModel()
+        {
+            if (IsAttacker.Value)
+            {
+                _tankChaser.SetActive(true);
+            }
+            else
+            {
+                _tankRunner.SetActive(true);
+            }
+        }
 
         private void Awake()
         {
@@ -122,7 +147,7 @@ namespace FirstGameNiteJam
             {
                 if (IsAttacker.Value)
                 {
-                    var bullet = Instantiate(_bulletPrefab, transform.position + transform.forward, Quaternion.identity);
+                    var bullet = Instantiate(_bulletPrefab, _gunOut.position, Quaternion.identity);
                     bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
                     Destroy(bullet, 5f);
                     StartCoroutine(Reload(_info.ShootReloadTime));

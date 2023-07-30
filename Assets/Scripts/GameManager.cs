@@ -104,7 +104,7 @@ namespace FirstGameNiteJam
 
         public void RemoveTank(TankController tc)
         {
-            tc.GetComponent<MeshRenderer>().enabled = false;
+            tc.Disable();
             tc.enabled = false;
             if (_registeredTanks.Count(x => x.enabled) == 1)
             {
@@ -129,8 +129,8 @@ namespace FirstGameNiteJam
             // Put all tanks back to the game
             foreach (var tc in _registeredTanks)
             {
-                tc.GetComponent<MeshRenderer>().enabled = true;
                 tc.enabled = true;
+                tc.SetModel();
             }
 
         }
