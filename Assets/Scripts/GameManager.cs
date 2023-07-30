@@ -78,7 +78,7 @@ namespace FirstGameNiteJam
             // Randomize tank position and role
             var prevAttacker = _registeredTanks.FirstOrDefault(x => x.IsAttacker.HasValue && x.IsAttacker.Value).gameObject.GetInstanceID();
             List<int> indexes = new();
-            int i = 0;
+            int i2 = 0;
             foreach (var tc in _registeredTanks)
             {
                 SetPosition(tc);
@@ -87,9 +87,9 @@ namespace FirstGameNiteJam
                 tc.SetModel();
                 if (tc.gameObject.GetInstanceID() != prevAttacker)
                 {
-                    indexes.Add(i);
+                    indexes.Add(i2);
                 }
-                i++;
+                i2++;
             }
             _registeredTanks[indexes[Random.Range(0, indexes.Count)]].IsAttacker = true;
         }
