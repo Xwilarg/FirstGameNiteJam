@@ -30,6 +30,12 @@ namespace FirstGameNiteJam
         [SerializeField]
         private GameInfo _info;
 
+        [SerializeField]
+        private AudioSource _source;
+
+        [SerializeField]
+        private AudioClip _waitingBGM, _gameBGM;
+
         private float? _timerVal;
 
         public static GameManager Instance { private set; get; }
@@ -92,6 +98,9 @@ namespace FirstGameNiteJam
                 i2++;
             }
             _registeredTanks[indexes[Random.Range(0, indexes.Count)]].IsAttacker = true;
+
+            _source.clip = _gameBGM;
+            _source.Play();
         }
 
         private IEnumerator PrepareBackToMenu()
@@ -171,6 +180,8 @@ namespace FirstGameNiteJam
                         }
                     }
                 }
+                _source.clip = _waitingBGM;
+                _source.Play();
                 if (_registeredTanks.Any(x => x.Victories == _info.PointsBeforeVictory))
                 {
                     StartCoroutine(PrepareBackToMenu());
