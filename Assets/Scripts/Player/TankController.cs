@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TouhouPrideGameJam5.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace FirstGameNiteJam
 {
@@ -28,6 +29,9 @@ namespace FirstGameNiteJam
 
         [SerializeField]
         private GameObject _trophy;
+
+        [SerializeField]
+        private Sprite _trophyImg, _trophyImgSpe;
 
         public string ClientId { set; get; }
 
@@ -95,7 +99,17 @@ namespace FirstGameNiteJam
         public void Win()
         {
             _vCanvas.SetActive(true);
-            Instantiate(_trophy, _trophyHContainer);
+            Sprite targetSprite;
+            if (_trophyHContainer.childCount == 0)
+            {
+                targetSprite = _trophyImg;
+            }
+            else
+            {
+                targetSprite = Random.Range(0, 100) > 90 ? _trophyImgSpe : _trophyImg;
+            }
+            var t = Instantiate(_trophy, _trophyHContainer);
+            t.GetComponent<Image>().sprite = targetSprite;
         }
 
         public void ResetTank()

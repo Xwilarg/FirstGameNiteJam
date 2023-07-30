@@ -83,6 +83,8 @@ MonoBehaviour:
   _vCanvas: {fileID: 4252770384511658629}
   _trophyHContainer: {fileID: 3114002039807018184}
   _trophy: {fileID: 5353285702824693046, guid: fd563d3348476a94eb0e16570035f3ea, type: 3}
+  _trophyImg: {fileID: 21300000, guid: 9d085209f06390f4c8474eeed6a7bef1, type: 3}
+  _trophyImgSpe: {fileID: 21300000, guid: 19acd5fd66221664183e19878c45a50f, type: 3}
   _decoy: {fileID: 2000490849070120132, guid: 4f16a05d5d01fc04cb53b894a8e5844b, type: 3}
 --- !u!114 &2374787183358739844
 MonoBehaviour:
