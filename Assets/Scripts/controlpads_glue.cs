@@ -101,7 +101,21 @@ public class controlpads_glue : MonoBehaviour
 
     public void SendMessageToClient(string client, string message)
     {
-        ControlpadsLibrary.send_message(client, message);
+        if (client == null || client.Length == 0 || client.Contains(" "))
+        {
+            Debug.Log(string.Format("Warning: Invalid client specified for controlpad message <{0}>", message));
+            return;
+        }
+        if (message == null)
+        {
+            Debug.Log("Warning: Tried to send a null controlpad message");
+            return;
+        }
+        int result = ControlpadsLibrary.send_message(client, message);
+        if (result != 0)
+        {
+            Debug.Log(string.Format("Could send <{1}> to <{0}>: <{2}>", client, message, result));
+        }
     }
 
     public List<string> GetMessages(string client)
