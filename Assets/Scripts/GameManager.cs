@@ -79,6 +79,8 @@ namespace FirstGameNiteJam
             {
                 SetPosition(tc);
                 tc.ResetTank(true);
+                tc.enabled = true;
+                tc.SetModel();
             }
             _registeredTanks[Random.Range(0, _registeredTanks.Count)].IsAttacker = true;
         }
