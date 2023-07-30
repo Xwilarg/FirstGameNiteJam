@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7212366089525660465}
   - component: {fileID: 6872124055450790105}
   m_Layer: 0
-  m_Name: Arena Corner
+  m_Name: Corner Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
