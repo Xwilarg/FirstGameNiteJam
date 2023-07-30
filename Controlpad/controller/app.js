@@ -77,12 +77,9 @@ function controlpadUpdate() {
 
 function handleMessage(msg) {
     console.log(msg);
-    if (msg === "ATT1") {
-        g_playerType = 1;
-        refresh();
-    }
-    if (msg === "ATT0") {
-        g_playerType = 0;
+    if (msg.startsWith("ATT")) {
+        const data = msg.split(';');
+        g_playerType = `${data[2]}, ${data[3]}, ${data[4]}`;
         refresh();
     }
 }
@@ -98,10 +95,8 @@ function drawController(canvas, ctx) {
     canvas.width = window.innerWidth-1;
     canvas.height = window.innerHeight-1;
     let color = "10, 10, 10";
-    if (g_playerType === 0) {
-        color = "10, 255, 10";
-    } else if (g_playerType === 1) {
-        color = "255, 10, 10";
+    if (g_playerType !== null) {
+        color = g_playerType;
     }
 
     const yellow = `rgba(${color}, .9)`;

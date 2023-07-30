@@ -31,6 +31,8 @@ namespace FirstGameNiteJam
         private Transform _currentDecoy;
         private Rigidbody _rbDecoy;
 
+        private Color _color;
+
         // I renamed this one because I didn't want to confuse it with _decoy 
         private readonly List<GameObject> _decoysList = new();
 
@@ -43,7 +45,8 @@ namespace FirstGameNiteJam
                 SetModel();
                 if (ClientId != null)
                 {
-                    GameManager.Instance.SendMessageToClient(ClientId, IsAttacker.Value ? "ATT1" : "ATT0");
+                    var cStr = $"{(int)(_color.r * 255f)};{(int)(_color.g * 255f)};{(int)(_color.b * 255f)}";
+                    GameManager.Instance.SendMessageToClient(ClientId, $"ATT;{(IsAttacker.Value ? 1 : 0)};{cStr}");
                 }
             }
             get => _isAttacker;
@@ -67,12 +70,14 @@ namespace FirstGameNiteJam
             {
                 _tankRunner.SetActive(true);
             }
+            GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", _color);
         }
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _health = _info.BaseHealth;
+            _color = new(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         }
 
         public void ResetTank()
@@ -156,6 +161,7 @@ namespace FirstGameNiteJam
                 else
                 {
                     _currentDecoy = Instantiate(_decoy, transform.position, transform.rotation, null).transform;
+                    _currentDecoy.GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", _color);
                     Destroy(_currentDecoy.gameObject, _info.DecoyLifetime);
                     _decoysList.Add(_currentDecoy.gameObject);
                     _rbDecoy = _currentDecoy.GetComponent<Rigidbody>();
