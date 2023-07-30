@@ -60,7 +60,6 @@ public class controlpads_glue : MonoBehaviour
         if (ClientsChanged())
         {
             clientHandles = GetClientHandles();
-            Debug.Log(string.Join(", ", clientHandles));
         }
         foreach (string client in clientHandles)
         {
