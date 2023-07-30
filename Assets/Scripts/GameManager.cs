@@ -40,6 +40,7 @@ namespace FirstGameNiteJam
         private List<TankController> _registeredTanks = new();
 
         public bool DidWin { private set; get; } = true;
+        public bool GameEnded { private set; get; }
 
         private int _playerJoined;
         private bool _isAttacker = true;
@@ -87,6 +88,7 @@ namespace FirstGameNiteJam
 
         private IEnumerator PrepareBackToMenu()
         {
+            GameEnded = true;
             _startingText.gameObject.SetActive(true);
             foreach (var tc in _registeredTanks)
             {

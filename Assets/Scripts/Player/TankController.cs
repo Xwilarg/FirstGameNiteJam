@@ -166,7 +166,7 @@ namespace FirstGameNiteJam
         public void TakeDamage()
         {
             if (IsAttacker.HasValue && IsAttacker.Value) return;
-            if (GameManager.Instance.DidWin) return;
+            if (GameManager.Instance.DidWin && !GameManager.Instance.GameEnded) return;
             _health--;
             if (_health == 0)
             {
