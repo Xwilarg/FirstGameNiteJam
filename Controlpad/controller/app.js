@@ -11,6 +11,34 @@ var g_playerType = null;
 
 var g_loadState = 0;
 
+let c_left = 0;
+let c_right = 0;
+let c_up = 0;
+let c_down = 0;
+let c_action = 0;
+
+function setControl(id, isPressed) {
+    if (id === "up") c_up = isPressed;
+    else if (id === "down") c_down = isPressed;
+    else if (id === "left") c_left = isPressed;
+    else if (id === "right") c_right = isPressed;
+    else if (id === "action") c_action = isPressed;
+    else
+    {
+        return;
+    }
+    refresh();
+}
+
+function isControlPressed(id) {
+    if (id === "up") return c_up === 1;
+    else if (id === "down") return c_down === 1;
+    else if (id === "left") return c_left === 1;
+    else if (id === "right") return c_right === 1;
+    else if (id === "action") return c_action === 1;
+    return false;
+}
+
 // ---- Messages ----
 
 
@@ -51,6 +79,7 @@ function handleTouchStart(id, x, y) {
             g_loadState = 2;
             refresh();
         } else {
+            setControl(bid, 1);
             messages.push(`{${bid}};1`);
         }
     });
@@ -69,6 +98,7 @@ function handleTouchEnd(id, x, y) {
         if (g_loadState < 2) {
             // Not supposed to happen
         } else {
+            setControl(bid, 0);
             messages.push(`{${bid}};0`);
         }
     });
@@ -202,7 +232,7 @@ function drawController(canvas, ctx) {
     // Draw buttons
     global_spec.buttons.forEach(function (b, i) {
         ctx.beginPath();
-        if (b.depressed) {
+        if (isControlPressed(b.id)) {
         ctx.fillStyle = 'rgb(190,190,190)';
         } else {
         ctx.fillStyle = 'rgb(230,230,230)';
