@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3821997370468136605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.385}
+  m_LocalPosition: {x: 0, y: 0.8, z: 1.385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,9 +288,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25fae6fb9b0e4f0409b30e1a7ca9faa5, type: 3}
@@ -385,8 +393,24 @@ PrefabInstance:
       value: Tank
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ad5494ce51c577647b90ee64b9a3ef91, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad5494ce51c577647b90ee64b9a3ef91, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad5494ce51c577647b90ee64b9a3ef91, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ad5494ce51c577647b90ee64b9a3ef91, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ad5494ce51c577647b90ee64b9a3ef91, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5494ce51c577647b90ee64b9a3ef91, type: 3}

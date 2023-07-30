@@ -8,7 +8,7 @@ namespace FirstGameNiteJam.Player
         {
             if (collision.collider.CompareTag("Player"))
             {
-                collision.collider.GetComponent<TankController>().TakeDamage();
+                collision.collider.transform.parent.GetComponent<TankController>().TakeDamage();
             }
             else if (collision.collider.CompareTag("Decoy"))
             {

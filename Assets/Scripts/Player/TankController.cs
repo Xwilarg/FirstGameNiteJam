@@ -58,6 +58,7 @@ namespace FirstGameNiteJam
 
         public void SetModel()
         {
+            Disable();
             if (IsAttacker.Value)
             {
                 _tankChaser.SetActive(true);
