@@ -33,6 +33,9 @@ namespace FirstGameNiteJam
         [SerializeField]
         private Sprite _trophyImg, _trophyImgSpe;
 
+        [SerializeField]
+        private GameObject _explosion;
+
         public string ClientId { set; get; }
 
         private Rigidbody _rb;
@@ -176,6 +179,7 @@ namespace FirstGameNiteJam
             _health--;
             if (_health == 0)
             {
+                Destroy(Instantiate(_explosion, transform.position, Quaternion.identity), 1f);
                 GameManager.Instance.RemoveTank(this);
             }
         }
