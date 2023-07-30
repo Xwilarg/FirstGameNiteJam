@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 9164190757666115740}
   - component: {fileID: 4928193794900554612}
   m_Layer: 0
-  m_Name: Arena Inner Corner
+  m_Name: Corner In 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
