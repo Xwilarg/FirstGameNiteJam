@@ -9,6 +9,8 @@ var g_canvas;
 var g_ctx;
 var g_playerType = null;
 
+var g_loadState = 0;
+
 // ---- Messages ----
 
 
@@ -27,6 +29,9 @@ function handleClick(x, y) {
 }
 
 function getTouchId(x, y, callback) {
+    if (g_loadState < 2) {
+        callback(null);
+    }
     global_spec.buttons.forEach(function (b, i) {
         if (x >= b.x && x <= b.x + b.w &&
         y >= b.y && y <= b.y + b.h)
@@ -41,7 +46,13 @@ function getTouchId(x, y, callback) {
 function handleTouchStart(id, x, y) {
     let msg = "TouchStart(" + x.toString() + "," + y.toString() + ")";
     getTouchId(x, y, (bid) => {
-        messages.push(`{${bid}};1`);
+        if (g_loadState < 2) {
+            messages.push(`{conn};1`);
+            g_loadState = 2;
+            refresh();
+        } else {
+            messages.push(`{${bid}};1`);
+        }
     });
 }
 
@@ -55,7 +66,11 @@ function handleTouchMove(id, x, y) {
 function handleTouchEnd(id, x, y) {
     let msg = "TouchEnd(" + x.toString() + "," + y.toString() + ")";
     getTouchId(x, y, (bid) => {
-        messages.push(`{${bid}};0`);
+        if (g_loadState < 2) {
+            // Not supposed to happen
+        } else {
+            messages.push(`{${bid}};0`);
+        }
     });
 }
 
@@ -94,6 +109,17 @@ function drawController(canvas, ctx) {
     
     canvas.width = window.innerWidth-1;
     canvas.height = window.innerHeight-1;
+
+    if (g_loadState === 0) {
+        ctx.fillStyle = "#808080";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#000000";
+        ctx.font = "48px serif";
+        ctx.fillText("Game loaded! Click on anywhere on screen to start", 100, 100);
+        g_loadState = 1;
+        return;
+    }
+
     let color = "10, 10, 10";
     if (g_playerType !== null) {
         color = g_playerType;

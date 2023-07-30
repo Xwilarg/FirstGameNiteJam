@@ -176,6 +176,7 @@ namespace FirstGameNiteJam
                     case "{left}": target.GoLeft(isPressed); break;
                     case "{right}": target.GoRight(isPressed); break;
                     case "{action}": if (isPressed) target.DoAction(); break;
+                    case "{conn}": break;
                     default: Debug.LogError($"Unknown message {id}"); break;
                 }
             }

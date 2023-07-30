@@ -39,7 +39,7 @@ ctx.fillStyle = "#808080";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "#000000";
 ctx.font = "48px serif";
-ctx.fillText("Touch", 100, 100);
+ctx.fillText("Loading...", 100, 100);
 
 
 function screenChange() {
