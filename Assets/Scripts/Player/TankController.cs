@@ -36,6 +36,9 @@ namespace FirstGameNiteJam
         [SerializeField]
         private GameObject _explosion;
 
+        [SerializeField]
+        private AudioSource _shoot;
+
         public string ClientId { set; get; }
 
         private Rigidbody _rb;
@@ -236,6 +239,7 @@ namespace FirstGameNiteJam
                     var bullet = Instantiate(_bulletPrefab, _gunOut.position, Quaternion.identity);
                     bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
                     Destroy(bullet, 5f);
+                    _shoot.Play();
                     StartCoroutine(Reload(_info.ShootReloadTime));
                 }
                 else
