@@ -37,7 +37,11 @@ namespace FirstGameNiteJam
         private GameObject _explosion;
 
         [SerializeField]
-        private AudioSource _shoot;
+        private AudioSource _shootSound;
+
+        [SerializeField]
+        private AudioSource _decoySound;
+
 
         public string ClientId { set; get; }
 
@@ -239,7 +243,7 @@ namespace FirstGameNiteJam
                     var bullet = Instantiate(_bulletPrefab, _gunOut.position, Quaternion.identity);
                     bullet.GetComponent<Rigidbody>().AddForce(transform.forward * _info.BulletForce, ForceMode.Impulse);
                     Destroy(bullet, 5f);
-                    _shoot.Play();
+                    _shootSound.Play();
                     StartCoroutine(Reload(_info.ShootReloadTime));
                 }
                 else
@@ -249,6 +253,7 @@ namespace FirstGameNiteJam
                     Destroy(_currentDecoy.gameObject, _info.DecoyLifetime);
                     _decoysList.Add(_currentDecoy.gameObject);
                     _rbDecoy = _currentDecoy.GetComponent<Rigidbody>();
+                    _decoySound.Play();
                     StartCoroutine(Reload(_info.SkillReloadTime));
                 }
             }
