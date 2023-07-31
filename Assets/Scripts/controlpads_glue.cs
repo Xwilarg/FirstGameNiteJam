@@ -15,7 +15,7 @@ public struct c_flat_string_vec
     public UInt64 lens_cap;
 }
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
 public class ControlpadsLibrary
 {
     [DllImport("c_sharp_controlpads.dll")]
